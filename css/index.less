@@ -540,7 +540,9 @@
           .aslideContent {
             padding: 10px;
             div {
+              display: none;
               &.active {
+                display: block;
                 ul {
                   &.goodslist1 {
                     li {
@@ -681,10 +683,131 @@
               }
             }
           }
+          //选项卡开始
+          .BottomDetail {
+            //菜单
+            .tabBtns {
+              background: #ededed;
+              .clearfix();
+              li {
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                background: #fff;
+                height: 40px;
+                padding-left: 11px;
+                padding-right: 11px;
+                float: left;
+                text-align: center;
+                line-height: 40px;
+                &.active {
+                  background: red;
+                  border-left: 1px solid #ddd;
+                  a {
+                    color: #fff;
+                  }
+                }
+              }
+            }
+            //内容
+            .tabContents {
+              div {
+                padding-left: 20px;
+                line-height: 25px;
+                display: none;
+                &.active {
+                  margin: 10px 0;
+                  display: block;
+                }
+              }
+            }
+          }
         }
       }
     }
   }
-
   //内容区域结束
+
+  //右侧侧边栏开始
+  .rightAside {
+    width: 300px;
+    height: 100%;
+    background: #7a6e6e;
+    transition: 0.5s;
+    position: fixed;
+    top:0px; 
+    &.asideClose{
+      right: -294px;
+    }
+    &.asideOpen{
+      right: 0px;
+    }
+    //按钮区域
+    .btns{
+      width: 35px;
+      height: 35px;
+      background: #7a6e6e;
+      border-radius: 5px 0 0 5px;
+      left: -29px;
+      background-size: 35px 35px;
+      position: absolute;
+      &.btnsClose{
+        background-image: url('../images/list.png');
+      }
+      &.btnsOpen{
+        background-image: url('../images/cross.png');
+      }
+    }
+
+    //侧边栏内容区域
+    .content{
+      width: 294px;
+      background:bisque ;
+      position: absolute;
+      left: 6px;
+      top: 0px;
+      bottom: 0px;
+      z-index: 50;
+    }
+    //侧边导航
+    .navlist{
+      position: absolute;
+      left: -29px;
+      top:50%;
+      transform: translateY(-50%);
+      li{
+        width: 35px;
+        height: 35px;
+        position: relative;
+        p{
+          width: 35px;
+          height: 35px;
+          background: #7a6e6e;
+          background-image: url(../images/toolbars.png);
+          background-position: -87px -174px;
+          transition: 0.5s;
+        }
+        i{
+          width: 62px;
+          height: 35px;
+          text-align: center;
+          line-height: 35px;
+          position: absolute;
+          left: 35px;
+          transition: 0.5s;
+          top:0px;
+          background: #7a6e6e;
+        }
+        &:hover{
+          p{
+            background-color: pink;
+          }
+          i{
+            background-color: pink;
+            left: -62px;
+          }
+        }
+      }
+    }
+  }
 }

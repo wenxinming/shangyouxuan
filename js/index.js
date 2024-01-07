@@ -413,6 +413,8 @@ window.onload = function () {
     function changePriceBind(arr) {
         let oldPrice = document.querySelector('#wrapper #content .contentMain #center #right .rightTop .priceWrap .priceTop .price p');
 
+
+
         let num = goodData.goodsDetail.price;
         for (let i = 0; i < arr.length; i++) {
             if (arr[i]) {
@@ -420,8 +422,87 @@ window.onload = function () {
             }
         }
         oldPrice.innerHTML = num;
+        let leftPrice = document.querySelector('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .chooseBox .listWrap .left p');
+        leftPrice.innerHTML = "￥" + num;
+        let ips = document.querySelectorAll('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .chooseBox .listWrap .middle li div input');
+        let changePrice = document.querySelector('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .chooseBox .listWrap .right i');
+        for(let i = 0; i < ips.length; i++) {
+
+            if(ips[i].checked){
+                num += Number(ips[i].value);
+            }
+        }
+        changePrice.innerHTML = '￥' + num;
+
 
 
     }
+
+    function choosePrice() {
+        let ips = document.querySelectorAll('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .chooseBox .listWrap .middle li div input');
+        let leftPrice = document.querySelector('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .chooseBox .listWrap .left p');
+        let rightPrice = document.querySelector('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .chooseBox .listWrap .right i');
+        for(let i = 0 ; i < ips.length; i++) {
+            ips[i].onclick = function() {
+                let num = Number(leftPrice.innerText.slice(1));
+                for(let j = 0; j < ips.length; j++) {
+                    if(ips[j].checked) {
+                        num += Number(ips[j].value);
+                    }
+                }
+                rightPrice.innerHTML = '￥' + num;
+
+            }
+        }
+   
+    }
+    choosePrice();  
+
+    //封装一个公共选项卡
+    function Tab(tabBtns,tabConts) {
+        for(let i = 0; i < tabBtns.length;i++) {
+            tabBtns[i].index = i;
+            tabBtns[i].onclick = function() {
+                for(let j = 0; j < tabBtns.length; j++) {
+                    tabBtns[j].className = '';
+                    tabConts[j].className = '';
+                }
+                this.className = 'active';
+                tabConts[this.index].className = 'active';
+            }
+        }
+    }
+
+    function leftTab() {
+        let h4s = document.querySelectorAll('#wrapper #content .contentMain .goodsDetailWrap .leftAside .asideTop h4')
+        let divs = document.querySelectorAll('#wrapper #content .contentMain .goodsDetailWrap .leftAside .aslideContent>div');
+        Tab(h4s,divs);
+    }
+    leftTab()
+
+    function rightTab() {
+        let lis = document.querySelectorAll('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .BottomDetail .tabBtns li');
+        let divs = document.querySelectorAll('#wrapper #content .contentMain .goodsDetailWrap .rightDetail .BottomDetail .tabContents div');
+        Tab(lis,divs);
+    }
+    rightTab();
+
+    //右边侧边栏的点击效果
+    function rightAsideBind() {
+        let btn = document.querySelector('#wrapper .rightAside .btns');
+        let rightAside = document.querySelector('#wrapper .rightAside');
+        let flag = true;
+        btn.onclick = function() {
+            if(flag) {
+                btn.className = 'btns btnsOpen';
+                rightAside.className = 'rightAside asideOpen';
+            }else{
+                btn.className = 'btns btnsClose'
+                rightAside.className = 'rightAside asideClose';
+            }
+            flag = !flag;
+        }
+    }
+    rightAsideBind();
 
 }
